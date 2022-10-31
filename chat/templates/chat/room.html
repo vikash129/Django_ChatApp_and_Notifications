@@ -1,0 +1,68 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+
+{% block title %}
+    Welcome to    AI VideoChat
+{% endblock %}
+
+{% block css %}
+
+<style>
+    #chatLog {
+        height: 300px;
+        background-color: #FFFFFF;
+        resize: none;
+    }
+
+    #onlineUsersSelector {
+        height: 300px;
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-3 p-5">
+    <h2>django-channels-chat</h2>
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="mb-2">
+                <label for="chatLog">Room: #{{ room_name }} | Name: #{{user_name}}</label>
+                <textarea class="form-control" id="chatLog" readonly></textarea>
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control" id="chatMessageInput" placeholder="Enter your chat message">
+                <div class="input-group-append">
+                    <button class="btn btn-success" id="chatMessageSend" type="button">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+            <label for="onlineUsers">Online users</label>
+            <select multiple class="form-control" id="onlineUsersSelector">   </select>
+        </div>
+
+    </div>
+    {{ room_name|json_script:"roomName" }}
+    {{ user_name|json_script:"userName" }}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+{% block js %}
+
+<script src="{% static 'chat/room.js' %}"></script>
+
+{% endblock %}
